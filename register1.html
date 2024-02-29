@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- Include Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAtFH9zkVj9rMcolS-VVn7zbRHwGnjLV6U",
+            authDomain: "chatapp-dd23c.firebaseapp.com",
+            projectId: "chatapp-dd23c",
+            storageBucket: "chatapp-dd23c.appspot.com",
+            messagingSenderId: "1024910468628",
+            appId: "1:1024910468628:web:392b5dc749d46a289fe901"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Function to handle user registration
+        function registerUser() {
+            const username = document.getElementById('username').value;
+            const usn = document.getElementById('usn').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            // Register the user with Firebase Authentication
+            firebase.auth().createUserWithEmailAndPassword(username, password)
+                .then((userCredential) => {
+                    // User registered successfully
+                    alert('User registered successfully');
+                    // You can redirect the user or perform other actions here
+                })
+                .catch((error) => {
+                    // Handle errors
+                    alert(error.message);
+                });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration</h2>
+        <form>
+            <input type="text" id="username" placeholder="Username">
+            <input type="text" id="usn" placeholder="USN">
+            <input type="password" id="password" placeholder="Password">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <button type="button" onclick="registerUser()">Register</button>
+        </form>
+    </div>
+</body>
+</html>
